@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+    <html lang="tr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Dijital Ajanda</title>
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    </head>
+    <body>
+
+        <div id="auth-ekrani" class="screen active">
+            <h2>Dijital Ajandama Hoş Geldiniz</h2>
+            <div class="auth-buttons">
+                <button onclick="showScreen('giris-ekrani')">Giriş Yap</button>
+                <button onclick="showScreen('kayit-ekrani')">Kayıt Ol</button>
+            </div>
+        </div>
+
+        <div id="giris-ekrani" class="screen">
+            <button class="back-btn" onclick="showScreen('auth-ekrani')"><i class="fas fa-arrow-left"></i></button>
+            <h3>Giriş Yap</h3>
+            <input type="email" id="giris-email" placeholder="E-posta" required>
+            <input type="password" id="giris-sifre" placeholder="Şifre" required>
+            <button onclick="handleLogin()">Giriş Yap</button>
+            <p id="giris-hata-mesaji" class="hata-mesaji"></p>
+        </div>
+
+        <div id="kayit-ekrani" class="screen">
+            <button class="back-btn" onclick="showScreen('auth-ekrani')"><i class="fas fa-arrow-left"></i></button>
+            <h3>Kayıt Ol</h3>
+            <input type="text" id="kayit-kullanici-adi" placeholder="Kullanıcı Adı" required>
+            <input type="email" id="kayit-email" placeholder="E-posta" required>
+            <input type="password" id="kayit-sifre" placeholder="Şifre Oluştur" required>
+            <button onclick="handleRegister()">Kayıt Ol</button>
+            <p id="kayit-hata-mesaji" class="hata-mesaji"></p>
+        </div>
+
+        <div id="ana-ekran" class="screen">
+            <header>
+                <h1 id="karsilama-mesaji">Hoş Geldiniz, Kullanıcı</h1>
+                <div class="header-actions">
+                    <button id="yeni-kayit-btn" onclick="openAgendaPage('new')">+ Yeni</button>
+                    <button id="cikis-yap-btn" onclick="handleLogout()"><i class="fas fa-sign-out-alt"></i> Çıkış</button>
+                </div>
+            </header>
+
+            <main id="takvim-ana-bolum">
+                <div id="takvim-ay-baslik">
+                    <button onclick="changeMonth(-1)"><i class="fas fa-chevron-left"></i></button>
+                    <h2 id="current-month-year"></h2>
+                    <button onclick="changeMonth(1)"><i class="fas fa-chevron-right"></i></button>
+                </div>
+                <div id="takvim-container">
+                    </div>
+            </main>
+        </div>
+
+        <div id="ajanda-sayfasi" class="screen">
+            <div class="ajanda-header">
+                <h2 id="ajanda-baslik"></h2>
+                <p id="ozel-gun-bilgisi"></p>
+            </div>
+
+            <div class="ajanda-ayarlar">
+                <label>Sayfa Rengi: <input type="color" id="sayfa-rengi" onchange="applyStyle()"></label>
+                <label>Punto: <input type="number" id="yazi-puntosu" min="10" max="32" value="16" onchange="applyStyle()"></label>
+                <label>Şekil: 
+                    <select id="sayfa-sekli" onchange="applyStyle()">
+                        <option value="duz">Düz</option>
+                        <option value="cizgili">Çizgili</option>
+                        <option value="kareli">Kareli</option>
+                    </select>
+                </label>
+            </div>
+
+            <div id="todo-list-container">
+                <h4 style="color:var(--todo-color, #4CAF50);">Yapılacaklar Listesi</h4>
+                <input type="color" id="todo-renk" value="#4CAF50" onchange="applyTodoColor()">
+                <div id="todo-list">
+                    </div>
+                <div class="todo-input-area">
+                    <input type="text" id="new-todo-text" placeholder="Yeni madde ekle">
+                    <button onclick="addTodoItem()">Ekle</button>
+                </div>
+            </div>
+            
+            <div id="icerik-alani" contenteditable="true" class="ajanda-icerik" placeholder="Ajanda içeriğinizi buraya yazın...">
+                </div>
+
+            <div class="medya-ekleme">
+                <input type="file" id="foto-dosya-input" onchange="handleFile(this.files, 'img')" accept="image/*, .pdf, .doc, .docx">
+                <button onclick="document.getElementById('foto-dosya-input').click()">Foto/Dosya Ekle</button>
+                <input type="text" id="link-input" placeholder="Link Adresi">
+                <button onclick="addLink()">Link Ekle</button>
+            </div>
+
+            <div class="ajanda-footer">
+                <button onclick="saveAgenda()">Kaydet</button>
+                <button onclick="showScreen('ana-ekran')">Kapat (Kaydetmeden)</button>
+            </div>
+        </div>
+
+        <script src="app.js"></script>
+    </body>
+    </html>
