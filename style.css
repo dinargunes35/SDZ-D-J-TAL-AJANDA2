@@ -33,6 +33,15 @@ body {
 .screen.active {
     display: block;
 }
+#giris-ekrani {
+    width: 100%;
+    max-width: 400px;
+    background-color: white;
+    padding: 40px 30px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    text-align: center;
+}
 
 /* --- Kimlik Doğrulama Ekranları --- */
 #auth-ekrani, #giris-ekrani, #kayit-ekrani {
