@@ -24,7 +24,6 @@ function showScreen(screenId) {
     if (targetScreen) {
         targetScreen.classList.add('active');
     } else {
-        // Hata Düzeltildi: Ters tırnak kullanıldı (Template Literal)
         console.error(`Hata: '${screenId}' ID'li ekran bulunamadı. HTML yapınızı kontrol edin.`);
         return;
     }
@@ -89,10 +88,8 @@ function handleLogin() {
     if (user) {
         currentUser = user;
         localStorage.setItem('currentUserEmail', user.email);
-        // Hata Düzeltildi: Ters tırnak kullanıldı (Template Literal)
         document.getElementById('karsilama-mesaji').textContent = `Hoş Geldiniz, ${currentUser.username}`;
         
-        // Alanları temizle
         document.getElementById('giris-email').value = '';
         document.getElementById('giris-sifre').value = '';
         showScreen('ana-ekran');
@@ -113,7 +110,6 @@ function checkAuthentication() {
         const user = getUsers().find(u => u.email === email);
         if (user) {
             currentUser = user;
-            // Hata Düzeltildi: Ters tırnak kullanıldı (Template Literal)
             document.getElementById('karsilama-mesaji').textContent = `Hoş Geldiniz, ${currentUser.username}`;
             showScreen('ana-ekran');
             return;
@@ -133,7 +129,6 @@ function getFirstDayOfMonth(year, month) {
 }
 
 function getAgendaKey() {
-    // Hata Düzeltildi: Ters tırnak kullanıldı (Template Literal)
     return `${currentUser.email}_entries`;
 }
 
@@ -143,7 +138,6 @@ function getAgendaEntries() {
 }
 
 function isSpecialDay(day, month) {
-    // Hata Düzeltildi: Ters tırnak kullanıldı (Template Literal)
     const key = `${day}_${month + 1}`;
     return specialDays[key] || null;
 }
@@ -181,7 +175,6 @@ function renderCalendar(year, month) {
     // Günler
     for (let day = 1; day <= daysCount; day++) {
         const dayDiv = document.createElement('div');
-        // Hata Düzeltildi: Ters tırnak kullanıldı (Template Literal)
         const dateString = `${day}-${month + 1}-${year}`; // KEY: 16-12-2025
         const dateObj = new Date(year, month, day);
         const dayOfWeek = dateObj.getDay();
@@ -262,7 +255,6 @@ function openAgendaPage(id) {
         
         const specialDayName = isSpecialDay(day, monthIndex - 1);
         if (specialDayName) {
-            // Hata Düzeltildi: Ters tırnak kullanıldı (Template Literal)
             specialInfoElement.textContent = `⭐ ${specialDayName} ⭐`;
         }
         
@@ -276,7 +268,6 @@ function openAgendaPage(id) {
             return;
         }
         baslikElement.textContent = userTitle;
-        // Hata Düzeltildi: Ters tırnak kullanıldı (Template Literal)
         currentAgendaId = `custom_${Date.now()}`; 
     }
     // else, mevcut custom kaydı yükleniyor.
@@ -361,12 +352,10 @@ function applyStyle() {
     contentArea.style.backgroundColor = document.getElementById('sayfa-rengi').value;
 
     // Yazı Puntosu
-    // Hata Düzeltildi: Ters tırnak kullanıldı (Template Literal)
     contentArea.style.fontSize = `${document.getElementById('yazi-puntosu').value}px`;
 
     // Sayfa Şekli
     const shape = document.getElementById('sayfa-sekli').value;
-    // Hata Düzeltildi: Ters tırnak kullanıldı (Template Literal)
     contentArea.className = `ajanda-icerik ${shape}`; 
 }
 
@@ -474,11 +463,9 @@ function handleFile(files) {
             let elementHTML = '';
             if (file.type.startsWith('image/')) {
                 // Fotoğraf
-                // Hata Düzeltildi: Ters tırnak kullanıldı (Template Literal)
                 elementHTML = `<img src="${e.target.result}" style="max-width:100%; height:auto; margin:10px 0;">`;
             } else {
                 // Dosya (PDF, Doc vb.)
-                // Hata Düzeltildi: Ters tırnak kullanıldı (Template Literal)
                 elementHTML = `<p><i class="fas fa-file"></i> Dosya: <a href="${e.target.result}" download="${file.name}">${file.name}</a></p>`;
             }
             
@@ -545,3 +532,4 @@ function attachEventListeners() {
         e.target.value = ''; // Aynı dosyayı tekrar yüklemeyi sağlamak için input'u temizle
     }); // <-- Eksik ')' ve '}' parantezi düzeltildi
 }
+
