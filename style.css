@@ -1,1 +1,323 @@
+:root {
+    --primary-color: #E6B6C8;
+    --accent-color: #ff9800;
+    --background-color: #f4f7f6;
+    --weekend-color: #ffebee; /* Hafta sonu rengi */
+    --special-day-color: #ffcdd2; /* Özel gün rengi */
+    --todo-color: #F8E1E7; /* To-do listesi varsayılan rengi */
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8cdda; /* 🎀 düz pastel pembe */
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+/* --- Genel Ekran Geçişleri --- */
+.screen {
+    width: 100%;
+    max-width: 420px;
+    background: #ffebee;
+
+
+    backdrop-filter: blur(8px);
+    
+    border-radius: 20px;              /* 🔵 oval kenarlar */
+    padding: 35px 30px;
+    margin: 20px;
+
+    box-shadow: 
+        0 15px 35px rgba(0, 0, 0, 0.25); /* 🌫️ gölge */
+
+    display: none;
+    animation: fadeIn 0.4s ease;
+
+}
+
+.screen.active {
+    display: block;
+}
+
+/* --- Kimlik Doğrulama Ekranları --- */
+#auth-ekrani, #giris-ekrani, #kayit-ekrani {
+    text-align: center;
+}
+
+.auth-buttons button, .screen button:not(.back-btn) {
+  .auth-buttons button,
+.screen button:not(.back-btn) {
+    background: #f8cdda;
+    color: white;
+    border: none;
+
+    padding: 12px 24px;
+    margin: 10px 5px;
+
+    border-radius: 25px;   /* 🔵 oval */
+    font-size: 1rem;
+    font-weight: 500;
+
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+}
+
+.auth-buttons button:hover, .screen button:not(.back-btn):hover {
+    background-color: #303f9f;
+}
+
+input[type="email"], input[type="password"], input[type="text"] {
+    width: calc(100% - 22px);
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.back-btn {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--primary-color);
+}
+
+.hata-mesaji {
+    color: red;
+    font-size: 0.9em;
+    margin-top: 10px;
+}
+
+/* --- Ana Ekran (Takvim) Stili --- */
+#ana-ekran header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+
+#karsilama-mesaji {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    margin: 0;
+}
+
+#takvim-ay-baslik {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+#takvim-container {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+    text-align: center;
+}
+
+.gun-isimleri {
+    font-weight: bold;
+    color: #666;
+    padding: 10px 0;
+    border-bottom: 2px solid #ddd;
+}
+
+.takvim-gun {
+    padding: 15px 5px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    font-weight: 500;
+    user-select: none;
+}
+
+.takvim-gun:hover:not(.empty-day) {
+    background-color: #e0e0e0;
+}
+
+.weekend {
+    background-color: var(--weekend-color);
+}
+
+.special-day {
+    background-color: var(--special-day-color);
+    color: #b71c1c;
+    font-weight: bold;
+}
+
+.has-entry {
+    border: 2px solid var(--accent-color);
+}
+
+.empty-day {
+    visibility: hidden;
+}
+
+/* --- Ajanda Sayfası Stili --- */
+#ajanda-sayfasi {
+    max-width: 800px;
+}
+
+.ajanda-header {
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+#ozel-gun-bilgisi {
+    color: red;
+    font-weight: bold;
+}
+
+.ajanda-ayarlar {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+    padding: 10px;
+    background: #f9f9f9;
+    border-radius: 5px;
+    align-items: center;
+}
+
+.ajanda-ayarlar label {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.9em;
+}
+
+/* İçerik Alanı (Ajanda Notu) */
+.ajanda-icerik {
+    min-height: 250px;
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin-top: 15px;
+    outline: none;
+    overflow-y: auto;
+}
+
+/* Sayfa Şekilleri (CSS Arkaplanı) */
+.cizgili {
+    padding-top: 3px;
+    line-height: 25px;
+    min-height: 300px;
+
+    background-color: #fffbe6;
+    background-image: repeating-linear-gradient(
+        to bottom,
+        transparent 0px,
+        transparent 24px,
+        #6fa8dc 25px
+    );
+}
+
+
+.kareli {
+    padding-top: 5px;
+    line-height: 25px;
+    background-size: 25px 25px;
+    background-image:
+        linear-gradient(to right, #ccc 1px, transparent 1px),
+        linear-gradient(to bottom, #ccc 1px, transparent 1px);
+}
+
+
+/* To-Do Listesi Stili */
+#todo-list-container {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    margin-bottom: 20px;
+    background-color: var(--todo-color, #4CAF50); /* Rengin dinamikleşmesi için */
+    color: white;
+}
+
+#todo-list-container h4 {
+    margin-top: 0;
+    color: white !important;
+}
+
+#todo-list-container input[type="color"] {
+    height: 30px;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+.todo-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 5px 0;
+    user-select: none;
+}
+
+.todo-item input[type="checkbox"]:checked + span {
+    text-decoration: line-through;
+    opacity: 0.7;
+}
+
+.todo-input-area {
+    display: flex;
+    margin-top: 10px;
+}
+
+.todo-input-area input {
+    flex-grow: 1;
+    margin-right: 5px;
+    color: black;
+}
+
+.medya-ekleme {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.medya-ekleme input[type="file"] {
+    display: none;
+}
+
+.ajanda-footer {
+    text-align: right;
+    margin-top: 20px;
+
+    #auth-ekrani,
+#giris-ekrani,
+#kayit-ekrani {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* dikey ortalama */
+    align-items: center;     /* yatay ortalama */
+    min-height: 80vh;        /* ekranın ortasına gelsin */
+    padding-top: 0;          /* üst boşluğu kaldır */
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+}
 
